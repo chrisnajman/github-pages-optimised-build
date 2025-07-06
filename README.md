@@ -26,6 +26,9 @@ The build process is fully scriptable using NPM scripts, with no reliance on too
 - GitHub Pages is configured to serve the site from the `/docs` folder instead of the root, so your published site uses these optimized files.
 
 > [!IMPORTANT]
+> The build process only supports a **flat** HTML structure, i.e. all HTML pages must sit in the root of the project (no folders).
+
+> [!IMPORTANT]
 > When publishing to GitHub Pages, make sure the Pages setting is configured to serve from the `/docs` folder on the `main` branch.
 
 ---
