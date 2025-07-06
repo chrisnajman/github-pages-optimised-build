@@ -1,0 +1,4 @@
+/* Decorative image for all pages */
+.production-line {
+    filter: invert(var(--image-invert));
+}

@@ -1,0 +1,144 @@
+/* Note: adjust @media screen and (width <= 60.625rem) {...} (60.625rem) according to how many items you have in the menu. */
+.primary-navigation {
+    position: relative;
+    & nav {
+        width: fit-content;
+        margin: 0 auto;
+
+        @media screen and (width <= 60.625rem) {
+            &.menu-hidden,
+            &.menu-visible {
+                margin-inline: auto;
+                display: grid;
+                grid-template-rows: 0fr;
+                transition: grid-template-rows var(--animation-timing) ease-in;
+
+                & > ul {
+                    overflow: hidden;
+                }
+            }
+
+            &.menu-visible {
+                grid-template-rows: 1fr;
+                width: 100%;
+
+                & > ul {
+                    padding-block-start: 3rem;
+                }
+            }
+        }
+    }
+
+    & ul {
+        list-style: "";
+        display: flex;
+        gap: 1.25rem;
+        align-items: baseline;
+        width: fit-content;
+        margin-inline: auto;
+
+        @media screen and (width <= 60.625rem) {
+            flex-direction: column;
+            gap: 0;
+            z-index: 300;
+        }
+    }
+    & a {
+        color: var(--accent-colour);
+        border-block-end: 0.3125rem solid transparent;
+        padding-block-end: 0.3125rem;
+        margin-block-end: 0.625rem;
+        @media screen and (width <= 60.625rem) {
+            padding: 0;
+            margin: 0;
+            border: 0;
+        }
+        display: block;
+        cursor: pointer;
+        text-decoration: none;
+
+        &[aria-current="page"],
+        &:hover {
+            border-block-end: 0.3125rem solid var(--body-bg);
+            color: var(--body-fg);
+
+            @media screen and (width <= 60.625rem) {
+                border: 0;
+            }
+        }
+
+        &[aria-current="page"] {
+            pointer-events: none;
+
+            @media screen and (width <= 60.625rem) {
+                font-weight: var(--bold);
+            }
+        }
+    }
+
+    @media screen and (width <= 60.625rem) {
+        max-width: 100%;
+        margin: 0;
+    }
+}
+
+.hamburger-button-wrapper {
+    display: none;
+}
+
+@media screen and (width <= 60.625rem) {
+    .hamburger-button-wrapper {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        margin-inline: auto;
+        position: absolute;
+        top: 0;
+        right: 0;
+        left: 0;
+
+        & p {
+            font-size: 1rem;
+            font-weight: normal;
+            margin-block-start: -0.3125rem;
+            margin-inline-start: auto;
+        }
+    }
+
+    .hamburger-button {
+        cursor: pointer;
+        width: 3.125rem;
+        background-color: transparent;
+        border: 0;
+
+        & .line {
+            width: 80%;
+            height: 0.625rem;
+            fill: var(--body-fg);
+            transition:
+                y var(--animation-timing) ease-in var(--animation-timing),
+                rotate var(--animation-timing) ease-in,
+                opacity 0ms var(--animation-timing);
+            transform-origin: center;
+        }
+
+        &[aria-expanded="true"] .line {
+            transition:
+                y var(--animation-timing) ease-in,
+                rotate var(--animation-timing) ease-in var(--animation-timing),
+                opacity 0ms var(--animation-timing);
+        }
+        &[aria-expanded="true"] :is(.top, .bottom) {
+            y: 2.9375rem;
+        }
+        &[aria-expanded="true"] .top {
+            rotate: 45deg;
+        }
+        &[aria-expanded="true"] .bottom {
+            rotate: -45deg;
+        }
+        &[aria-expanded="true"] .middle {
+            opacity: 0;
+        }
+    }
+}

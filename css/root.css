@@ -1,0 +1,23 @@
+:root {
+    overflow-y: scroll;
+    color-scheme: light dark;
+    --animation-timing: 250ms;
+    --bold: 600;
+    --border-radius: 1.25rem;
+    --trim: trim-both cap alphabetic;
+
+    /* light mode (default) */
+    --body-bg: #ccc;
+    --body-fg: #000;
+    --el-bg: #fff;
+    --accent-colour: blue;
+    --image-invert: 0;
+}
+
+.darkmode {
+    --body-bg: #333;
+    --body-fg: #fff;
+    --el-bg: #000;
+    --accent-colour: aqua;
+    --image-invert: 1;
+}
