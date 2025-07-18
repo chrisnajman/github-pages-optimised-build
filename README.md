@@ -48,6 +48,7 @@ npm install --save-dev esbuild html-minifier-terser postcss postcss-cli postcss-
 - **postcss, postcss-cli** — for CSS processing
 - **postcss-import** — enables @import rules in CSS for modular stylesheets
 - **postcss-nesting** — enables CSS nesting support
+- **postcss-url** — processes and rewrites URLs in CSS (e.g., copying assets and adjusting paths) for correct referencing in the build output
 - **cssnano** — minifies CSS
 - **shx** — cross-platform CLI utility (copy, rm, etc.)
 
