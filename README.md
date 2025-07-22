@@ -207,8 +207,14 @@ The JavaScript has been split into separate modules, improving code modularity:
 
 - `module-placeholder.js`: Empty module, imported into `index.js`.
 - `primary-navigation.js` and `hamburger-button.js`: See [Accessible Mobile Menu Git repository](https://github.com/chrisnajman/accessible-mobile-menu)
-- `loader.js`: See [Loader Git repository](https://github.com/chrisnajman/loader)
+- `loader.js`: Displays a loader animation until the page is fully rendered, then removes the loader and announces readiness for screen readers.
 - `theme.js`: Handles theme toggling (light/dark mode) and local storage management.
+
+---
+
+## Accessibility
+
+The site is fully navigable using tab keys and up/down arrows.
 
 ---
 
@@ -224,11 +230,6 @@ The application includes a dark mode and light mode toggle:
 
 ---
 
-## Accessibility
-
-The site is fully navigable using tab keys and up/down arrows.
-
----
 
 ## Testing and Compatibility
 
