@@ -156,7 +156,8 @@ code {
     padding: 1rem;
 }
 
-.external-link {
+/* External links */
+a[href^="https"] {
     color: var(--accent-colour);
     text-underline-offset: 0.5em;
 
