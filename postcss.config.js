@@ -4,7 +4,7 @@ module.exports = {
     require("postcss-nesting"),
     require("postcss-url")({
       url: "copy",
-      assetsPath: "docs/img",
+      assetsPath: "img",
       useHash: true,
     }),
     require("cssnano")({ preset: "default" }),
