@@ -64,9 +64,14 @@ module.exports = {
   plugins: [
     require("postcss-import"),
     require("postcss-nesting"),
+    require("postcss-url")({
+      url: "copy",
+      assetsPath: "img",
+      useHash: true,
+    }),
     require("cssnano")({ preset: "default" }),
   ],
-}
+}}
 ```
 
 > [!NOTE]
@@ -229,7 +234,6 @@ The application includes a dark mode and light mode toggle:
 > Remember to change `const LOCAL_STORAGE_PREFIX` in `js-modules/theme.js` to a unique identifier.
 
 ---
-
 
 ## Testing and Compatibility
 
