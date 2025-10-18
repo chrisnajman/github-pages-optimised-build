@@ -3,6 +3,23 @@
 > [!IMPORTANT]  
 > The following assumes you have Node.js installed on your machine.
 
+<details>
+  <summary><strong id="menu">Menu</strong></summary>
+ 
+  - [Description](#description)
+  - [Build & Deployment Setup for /docs Folder](#build--deployment-setup-for-docs-folder)
+  - [CSS](#css)
+  - [JavaScript](#javascript)
+  - [No JS](#no-js)
+  - [Accessibility](#accessibility)
+  - [Theme Toggling](#theme-toggling)
+  - [Testing and Compatibility](#testing-and-compatibility)
+  - [How to Run](#how-to-run)
+
+</details>
+
+## Description
+
 **GitHub Pages Optimised Build** is a test project designed to demonstrate an automated front-end build pipeline using modern tooling. The key purpose is to:
 
 - Automatically bundle and minify JavaScript, process and minify CSS (including nesting), and minify HTML
@@ -14,6 +31,8 @@ This approach ensures the original development files (with modular JS, nested CS
 The build process is fully scriptable using NPM scripts, with no reliance on tools like Webpack or Gulp.
 
 [View on GitPage](https://chrisnajman.github.io/github-pages-optimised-build)
+
+[Back to menu](#menu)
 
 ---
 
@@ -30,6 +49,8 @@ The build process is fully scriptable using NPM scripts, with no reliance on too
 
 > [!IMPORTANT]
 > When publishing to GitHub Pages, make sure the Pages setting is configured to serve from the `/docs` folder on the `main` branch.
+
+[Back to menu](#menu)
 
 ---
 
@@ -168,7 +189,6 @@ In the terminal, run:
 
 ```bash
 npm run build
-
 ```
 
 This will:
@@ -181,6 +201,8 @@ This will:
 
 > [!NOTE]
 > In the current project, the initial `npm run build` has already been run. However, any subsequent edits made to files and assets in the root of the project will necessitate further builds.
+
+[Back to menu](#menu)
 
 ---
 
@@ -195,12 +217,17 @@ The CSS has been split into separate modules, improving organization and reusabi
 - `root.css`: Global CSS custom properties (`--variables`) for themes, layout, and design tokens.
 - `base.css`: Global reset and base element styles.
 - `navigation.css`: Styles the primary navigation and hamburger menu.
+  - **Update 17/10/25**: mobile menu now positioned absolutely.
 - `theme-toggler.css`: Styles the dark/light mode toggle control.
 - `loader.css`: Styles the full-screen loading overlay that appears while the page is initializing.
+- `sticky-header.css`: (Optional. Delete if not required.) On scrolling the header always remains on top and the content slides under it.
+- `no-js.css`: See [No JS](#no-js), below.
 - `project-specific.css`: Contains small, per-project overrides or additions.
 
 > [!NOTE]
 > If you later revert to a single stylesheet without imports, the build process will continue to work seamlessly, as `postcss-import` gracefully handles the absence of `@import` statements.
+
+[Back to menu](#menu)
 
 ---
 
@@ -214,12 +241,111 @@ The JavaScript has been split into separate modules, improving code modularity:
 - `primary-navigation.js` and `hamburger-button.js`: See [Accessible Mobile Menu Git repository](https://github.com/chrisnajman/accessible-mobile-menu)
 - `loader.js`: Displays a loader animation until the page is fully rendered, then removes the loader and announces readiness for screen readers.
 - `theme.js`: Handles theme toggling (light/dark mode) and local storage management.
+- `page-header-resize-observer.js`: (Optional. Delete if not required.) Observes the `.header `element and updates the root's `scroll-padding-top` based on header size and the `--skip-link-gap` CSS variable (in `base.css`), ensuring skip links and anchor targets scroll into view with proper spacing below a fixed or sticky header.
+
+[Back to menu](#menu)
+
+---
+
+## No JS
+
+If JavaScript is disabled, a warning message is displayed to the user.
+
+The `no-js` class provides a simple fallback mechanism that lets you adjust styles and messages when JavaScript is unavailable.
+
+### How it Works
+
+#### HTML
+
+```html
+<!DOCTYPE html>
+<html
+  lang="en"
+  class="no-js"
+>
+  <head>
+    <!-- If JavaScript IS enabled, remove the 'no-js' class from <html> tag -->
+    <script>
+      document.documentElement.classList.remove("no-js")
+    </script>
+
+    <!-- Rest of <head> items -->
+  </head>
+
+  <body>
+    <!-- <body> content -->
+    <noscript>
+      <p>[Message to user, e.g. JavaScript is disabled, etc.]</p>
+    </noscript>
+    <!-- <body> content -->
+  </body>
+</html>
+```
+
+The message you display depends on how much of your site relies on JavaScript:
+
+- Non-essential functionality: A short notice such as "Certain features require JavaScript. Enable it to access all functionality." is usually sufficient.
+
+- JavaScript-dependent apps: If the site requires JavaScript to function, use a more specific message, for example: "This application requires JavaScript to [perform its main function]."
+
+#### CSS
+
+`no-js.css`:
+
+```css
+.no-js {
+  & .theme-toggler,
+  & .loader,
+  & .loader::after,
+  & .hamburger-button-wrapper,
+  & hr,
+  & .sticky-header-text {
+    display: none;
+  }
+
+  & .header {
+    position: static;
+  }
+
+  & .primary-navigation nav.menu-hidden {
+    display: flex;
+    width: fit-content;
+    transition: none;
+    pointer-events: auto;
+
+    & ul {
+      flex-wrap: wrap;
+      flex-direction: row;
+      justify-content: center;
+      gap: 1.25rem;
+    }
+  }
+}
+
+noscript p {
+  width: fit-content;
+  margin-inline: auto;
+  border: 0.1875rem solid var(--warning);
+  background-color: var(--body-fg);
+  color: var(--el-bg);
+  padding: 1em 1.5em;
+  border-radius: 0.75rem;
+  text-align: center;
+  text-wrap: balance;
+}
+```
+
+This CSS is specific to this project. In general, add any elements you want hidden inside the `.no-js { ... }` block, and style the `noscript p` element however you prefer.
+
+[Back to menu](#menu)
 
 ---
 
 ## Accessibility
 
 The site is fully navigable using tab keys and up/down arrows.
+
+[Back to menu](#menu)
 
 ---
 
@@ -231,7 +357,9 @@ The application includes a dark mode and light mode toggle:
 - Accessible buttons with appropriate ARIA attributes are used to improve usability.
 
 > [!IMPORTANT]
-> Remember to change `const LOCAL_STORAGE_PREFIX` in `js-modules/theme.js` to a unique identifier.
+> Remember to change `const LOCAL_STORAGE_PREFIX` in `js-modules/theme.js` to a unique identifier suitable for your project.
+
+[Back to menu](#menu)
 
 ---
 
@@ -239,7 +367,7 @@ The application includes a dark mode and light mode toggle:
 
 The application has been tested on the following platforms and browsers:
 
-- **Operating System**: Windows 10
+- **Operating System**: Windows 10/11
 - **Browsers**:
   - Google Chrome
   - Mozilla Firefox
@@ -249,6 +377,8 @@ The application has been tested on the following platforms and browsers:
 
 The layout and functionality have been verified in both browser and device simulation views to ensure responsiveness and usability.
 
+[Back to menu](#menu)
+
 ---
 
 ## How to Run
@@ -256,5 +386,7 @@ The layout and functionality have been verified in both browser and device simul
 1. Clone or download the repository to your local machine.
 2. Open the project folder and start a simple HTTP server (e.g., using `Live Server` in VS Code or Python's `http.server` module).
 3. Open the project in a modern browser (e.g., Chrome, Firefox, or Edge).
+
+[Back to menu](#menu)
 
 ---

@@ -2,3 +2,7 @@
 .production-line {
     filter: invert(var(--image-invert));
 }
+
+picture + p {
+    font-family: Georgia, serif;
+}

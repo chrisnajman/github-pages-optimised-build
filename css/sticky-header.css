@@ -1,0 +1,13 @@
+/* Comment out or delete this file, if sticky header not required.*/
+.header {
+    position: sticky;
+    z-index: 100;
+    top: -1px; /* top: 0 leaves a 1px gap at the top of the page */
+    right: 0;
+    left: 0;
+}
+
+.theme-toggler {
+    position: fixed;
+    z-index: 200;
+}

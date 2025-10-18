@@ -1,0 +1,40 @@
+.no-js {
+    & .theme-toggler,
+    & .loader,
+    & .loader::after,
+    & .hamburger-button-wrapper,
+    & hr,
+    & .sticky-header-text {
+        display: none;
+    }
+
+    & .header {
+        position: static;
+    }
+
+    & .primary-navigation nav.menu-hidden {
+        display: flex;
+        width: fit-content;
+        transition: none;
+        pointer-events: auto;
+
+        & ul {
+            flex-wrap: wrap;
+            flex-direction: row;
+            justify-content: center;
+            gap: 1.25rem;
+        }
+    }
+}
+
+noscript p {
+    width: fit-content;
+    margin-inline: auto;
+    border: 0.1875rem solid var(--warning);
+    background-color: var(--body-fg);
+    color: var(--el-bg);
+    padding: 1em 1.5em;
+    border-radius: 0.75rem;
+    text-align: center;
+    text-wrap: balance;
+}
