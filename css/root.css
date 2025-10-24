@@ -42,3 +42,14 @@
     --image-invert: 1;
     --shadow-colour: rgba(0, 0, 0, 0.5);
 }
+/* Automatic dark mode based on system preference */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --body-bg: #333;
+        --body-fg: #fff;
+        --el-bg: #000;
+        --accent-colour: aqua;
+        --image-invert: 1;
+        --shadow-colour: rgba(0, 0, 0, 0.5);
+    }
+}

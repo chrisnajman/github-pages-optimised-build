@@ -37,6 +37,11 @@
         font-weight: 600;
         color: var(--body-fg);
     }
+
+    /* Underline current theme label */
+    & .underline {
+        border-bottom: 0.0625rem solid currentColor;
+    }
 }
 
 .darkmode {
