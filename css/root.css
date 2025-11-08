@@ -1,6 +1,6 @@
 :root {
     overflow-y: scroll;
-    color-scheme: light dark;
+    color-scheme: light;
 
     /* 
         If sticky header: Space between top of viewport and main content when skip link is activated.
@@ -35,6 +35,7 @@
 }
 
 .darkmode {
+    color-scheme: dark;
     --body-bg: #333;
     --body-fg: #fff;
     --el-bg: #000;
